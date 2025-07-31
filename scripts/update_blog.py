@@ -1,5 +1,6 @@
 import os         
 import re
+import requests
 
 # ===[ 설정 항목 ]===
 USERNAME = "son-dan-ha"  # Velog 사용자명 (@ 없이)
