@@ -37,6 +37,10 @@ jobs:
         # feedparser: RSS 피드 파싱용
         # gitpython: Git 작업을 Python 코드에서 다룰 경우 (현재 스크립트에선 사용 안할수도)
 
+    # 경로 문제 디버깅용: 실제 workspace 디렉토리 구조 출력
+      - name: Show files in workspace (for debug)
+        run: ls -R
+        working-directory: ${{ github.workspace }}
 
         # Velog RSS를 읽어 .md 파일로 저장하는 사용자 정의 스크립트 실행
         # 문제: 이전 실행에서 'scripts/update_blog.py' 파일을 찾지 못해 오류 발생
