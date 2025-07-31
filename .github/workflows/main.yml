@@ -37,8 +37,12 @@ jobs:
 
 
         # Velog RSS를 읽어 .md 파일로 저장하는 사용자 정의 스크립트 실행
+        # 문제: 이전 실행에서 'scripts/update_blog.py' 파일을 찾지 못해 오류 발생
+        # 해결 방법: 'working-directory'를 ${{ github.workspace }}로 명시하여 정확한 루트 경로 설정
+        # 또한 실제 해당 경로에 'scripts/update_blog.py' 파일이 존재해야
       - name: Run script
         run: python ./scripts/update_blog.py
+        working-directory: ${{ github.workspace }}
 
         # 변경된 파일이 있다면 커밋하고 main 브랜치로 푸시
       - name: Commit and push if changed
