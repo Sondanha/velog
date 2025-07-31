@@ -23,7 +23,7 @@ query Posts($username: String!) {
 POST_BODY_QUERY = """
 query Post($username: String!, $url_slug: String!) {
   post(username: $username, url_slug: $url_slug) {
-    body_html
+    body
   }
 }
 """
@@ -61,7 +61,7 @@ def fetch_post_body(username, slug):
         print("Username:", username, "Slug:", slug)
 
     res.raise_for_status()
-    return res.json()["data"]["post"]["body_html"]
+    return res.json()["data"]["post"]["body"]
 
 
 
@@ -100,8 +100,5 @@ def save_as_markdown(posts, username):
 
 # ===[ 실행 진입점 ]===
 if __name__ == "__main__":
-    posts = fetch_posts(USERNAME)               # Velog 글 목록 불러오기
-    save_as_markdown(posts, USERNAME)           # 글마다 마크다운 파일로 저장
-
-if __name__ == "__main__":
-    main()
+    posts = fetch_posts(USERNAME)
+    save_as_markdown(posts, USERNAME)
