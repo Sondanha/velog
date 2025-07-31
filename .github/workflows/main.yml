@@ -33,8 +33,7 @@ jobs:
         # 필용한 파이썬 패키지 설치
       - name: Install dependencies
         run: |
-          pip install feedparser gitpython
-        # feedparser: RSS 피드 파싱용
+          pip install gitpython requests
         # gitpython: Git 작업을 Python 코드에서 다룰 경우 (현재 스크립트에선 사용 안할수도)
 
     # 경로 문제 디버깅용: 실제 workspace 디렉토리 구조 출력
