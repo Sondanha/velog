@@ -53,8 +53,16 @@ def fetch_post_body(username, slug):
         },
         headers={"Content-Type": "application/json"},
     )
+
+    if res.status_code != 200:
+        print("❌ GraphQL 요청 실패:")
+        print("Status Code:", res.status_code)
+        print("Response:", res.text)
+        print("Username:", username, "Slug:", slug)
+
     res.raise_for_status()
     return res.json()["data"]["post"]["body_html"]
+
 
 
 # ===[ 마크다운 파일로 저장하기 ]===
@@ -64,11 +72,16 @@ def save_as_markdown(posts, username):
     for post in posts:
         title = post["title"]
         slug = post["url_slug"]
+        print(f"📄 처리 중: {title} ({slug})")
         date = post["released_at"]
         url = f"https://velog.io/@{username}/{slug}"
 
         # 개별 글 본문 HTML 가져오기
-        body_html = fetch_post_body(username, slug)
+        try:
+            body_html = fetch_post_body(username, slug)
+        except Exception as e:
+            print(f"⚠️ {slug} 가져오기 실패: {e}")
+            continue
 
         # 저장할 파일 경로 생성
         filename = f"{slugify(slug)}.md"
