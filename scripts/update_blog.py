@@ -84,6 +84,10 @@ def fetch_post_body(username, slug):
 
 # 마크다운 파일로 저장하기
 def save_as_markdown(posts, username):
+    # 파일이름 'posts'가 존재하지만 디렉토리가 아닐 경우 삭제
+    if os.path.exists('posts') and not os.path.isdir('posts'):
+        os.remove('posts') 
+    
     os.makedirs(OUTPUT_DIR, exist_ok=True)  # posts/ 디렉토리 생성 (없으면 새로)
 
     for post in posts:
