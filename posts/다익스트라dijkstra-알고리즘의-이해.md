@@ -6,8 +6,9 @@
 
 ---
 
-![](https://velog.velcdn.com/images/son-dan-ha/post/752012df-0dbf-444c-920f-61c38ccf54f1/image.jpg)
-참고하면 좋을 포스트는 [dfs](https://velog.io/@son-dan-ha/DFS)와 bfs
+![](https://velog.velcdn.com/images/son-dan-ha/post/b2bab9a1-c641-4f4a-a0a3-4079a9845e5a/image.jpg)
+
+
 
 # 최단 경로
 코딩테스트 문제 중 **최단 경로**를 구하는 문제가 있다. 목적지로 이동하기 위한 가장 빠른 경로를 찾는 문제인데, 주로 각각의 지점(공간) 간의 이동 시간 혹은 거리가 주어진 상태에서 최소 시간, 최단 거리를 요구한다. 
@@ -213,40 +214,41 @@ def get_smallest_node():
     return index
 ```
 
-### 우선순위 큐
+<br>
 
-가중치 테이블에서 뽑아내고 싶은 값은 항상 **가장 작은 값**이다. 내부의 값 중 가장 작은 값(혹은 큰 값)을 pop 할 수 있는 자료구조가 바로 우선순위 큐다. 
 
-우선순위 큐는 파이썬의 heapq 모듈을 사용하여 쉽게 구현할 수 있다. 
+## 우선순위 큐
+
+가중치 테이블에서 뽑아내고 싶은 값은 항상 **가장 작은 값**이다. 내부의 값 중 가장 작은 값(혹은 큰 값)을 pop 할 수 있는 자료구조가 바로 **우선순위 큐**다. 우선순위 큐는 파이썬의 **heapq 모듈**을 사용하여 쉽게 구현할 수 있다. 
+
+## 파이썬의 `heapq` 모듈
+
+heapq는 파이썬의 list를 **완전 이진 트리**의 배열 표현으로 간주하고, heappush, heappop, heapify 등을 통해 그 리스트를 최소 힙(min-heap) 속성이 유지되도록 재배치한다. 
+
+- heapq.heapify(배열) : 최소 힙 상태로 만든다.
+- heapq.heappush(배열, 값) : 최소 힙 상태를 유지하며 푸쉬
+- heapq.heappop(배열) : 최소 힙 상태를 유지하며 팝
 
 ```python
 from heapq import heapify, heappush, heappop
 
-mylist = [4, 3, 8, 1, 0] 
+mylist = [4, 3, 8, 1, 0]  
 
-heapify(mylist) # 리스트를 최소힙 상태로 만든다.
-print(mylist) # [0, 1, 8, 4, 3]
+heapify(mylist) # [0, 1, 8, 4, 3]
+print(mylist)
 
-a = heappop(mylist) # 최소힙 상태가 되어 있어야 가능
-print(a) # 0
-heappush(mylist, 2)
-print(mylist) # [1, 2, 8, 4, 3]
+min_num = heappop(mylist)
+print(min_num) # 0  
 ```
 
 
 <br>
 
-### heapq로 다음 노드 찾기
-
-```python
-```
+# 코드 구현 
+- heapq 모듈을 사용한 코드와 사용하지 않은 코드 2가지를 알아보자
 
 
-
-<br>
-
-## 전체 코드
-
+## 코드 1
 
 ```python
 # 표준 입력을 더 빠르게 읽기 위한 단축 설정(한줄로 읽어옴)
@@ -319,6 +321,45 @@ for i in range(1, n+1):
     else:
         print(distance[i])
 ```
+
+<br>
+
+## 코드 2 (heapq)
+
+- 그래프는 위와 동일한 형태로 주어졌다고 가정
+
+```python
+from heapq import heappop, heappush
+
+visited = [False] * (n + 1)
+distance = [INF] * (n + 1)
+hq = [] # 최소 힙
+
+def dijkstra(start):
+    distance[start] = 0   
+    visited[start] = True 
+    
+    heappush(hq, (0, start)) # (가중치, 노드번호)
+    
+	while hq:
+    	cost, vertex = heappop(hq)
+        
+        # 이미 짧은 경로로 갱신된 노드는 패스
+        if cost != distance[vertex]:
+        	continue
+            # 시작인 0은 같으므로 not continue
+        
+        # (노드, 가중치)
+        for v, w in graph[vertex]: # 인접 노드 탐색
+            next_cost = cost + w
+            # 작은 값일 때 갱신 후 최소힙에 추가
+            if next_cost < distance[v]:
+                distance[v] = next_cost
+                heappush(hq, (next_cost, v))
+ 
+dijkstra(start)
+```
+
 
 
 
