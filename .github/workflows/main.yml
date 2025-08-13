@@ -52,10 +52,12 @@ jobs:
         # 변경된 파일이 있다면 커밋하고 main 브랜치로 푸시
       - name: Commit and push if changed
         run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git config --global user.name 'Sondanha'
+          git config --global user.email '155447715+Sondanha@users.noreply.github.com'
+          
           git remote set-url origin https://x-access-token:${{ secrets.GH_PAT }}@github.com/Sondanha/velog.git    
-          git add .
+          git add A
           git diff --cached --quiet || git commit -m "Update blog posts"
           git push origin main
       # x-access-token: 사용자 정보 명시
+      # git add -A : 수정 + 신규 + 삭제(file1.txt) 모두 스테이징.
