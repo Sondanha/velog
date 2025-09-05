@@ -49,15 +49,16 @@ jobs:
         run: python ./scripts/update_blog.py
         working-directory: ${{ github.workspace }}
 
-        # 변경된 파일이 있다면 커밋하고 main 브랜치로 푸시
+        # 액션에서 변경 파일을 커밋하려 했지만 git add A를 써버려 실제 존재하지 않는 파일 이름을 추가하려다 실패 
+        # 원래 의도 : 모든 변경사항을 스테이징해 커밋 후 main 브랜치에 푸시하는 기능
+        # 문제 원인 : 잘못된 명령 때문에 항상 에러가 발생해 업데이트가 진행되지 않았다.
       - name: Commit and push if changed
         run: |
           git config --global user.name 'Sondanha'
           git config --global user.email '155447715+Sondanha@users.noreply.github.com'
-          
-          git remote set-url origin https://x-access-token:${{ secrets.GH_PAT }}@github.com/Sondanha/velog.git    
-          git add A
+          git checkout -B main 
+          git add -A
           git diff --cached --quiet || git commit -m "Update blog posts"
+          git remote set-url origin https://x-access-token:${{ secrets.GH_PAT }}@github.com/Sondanha/velog.git
+          git pull --rebase origin main || true
           git push origin main
-      # x-access-token: 사용자 정보 명시
-      # git add -A : 수정 + 신규 + 삭제(file1.txt) 모두 스테이징.
