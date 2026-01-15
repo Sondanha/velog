@@ -6,6 +6,7 @@
 
 ---
 
+![](https://velog.velcdn.com/images/son-dan-ha/post/0ee1df61-989c-4725-92e8-390edefed723/image.png)
 # 트리(Tree)
 
 트리(Tree) 자료구조는 그래프(Graph)의 한 형태로 이해할 수 있다. 데이터 간의 <u>계층적 관계</u>를 표현하며, <u>사이클이 존재하지 않는</u> 구조를 가진다. 그래프에서는 일반적으로 **노드(Node)**와 **간선(Edge)**라는 표현을 사용하지만, 트리에서는 주로 **정점(Vertex)**과 **간선(Edge)** 또는 부모(Parent)와 자식(Child)이라는 관계 용어가 함께 사용된다.
