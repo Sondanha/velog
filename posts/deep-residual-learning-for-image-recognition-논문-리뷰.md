@@ -1,4 +1,4 @@
-# Deep Residual Learning for Image Recognition 논문 리뷰
+# Deep Residual Learning for Image Recognition 논문리뷰
 
 📅 2025-08-08T13:01:20.267Z
 

@@ -6,6 +6,7 @@
 
 ---
 
+![](https://velog.velcdn.com/images/son-dan-ha/post/a53de6ed-9442-4538-88a5-1cdd07ac2c65/image.png)
 # 1. Introduction
 
 DeepSeek-OCR 논문은 기존 **OCR 및 VLM 기반** 문서 이해 모델들이 **시각 토큰 수**가 과도하게 많다는 문제의식에서 출발한다. 고해상도 문서 이미지를 그대로 토큰화하면, 모델은 불필요한 시각 정보까지 처리해야 하고 이는 곧 <u>비용 증가</u>와 <u>추론 지연</u>으로 이어진다.
